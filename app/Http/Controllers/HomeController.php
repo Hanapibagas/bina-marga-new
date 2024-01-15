@@ -103,9 +103,9 @@ class HomeController extends Controller
         $data = DataCenter::where(function ($query) use ($user) {
             if ($user->rolesBidang->id != 1) {
                 if ($user->rolesSeksi) {
-                    $query->where('roles_seksi_id', $user->rolesSeksi->id);
+                    $query->where('roles_seksi_id', $user->rolesSeksi->id)->where('is_recycle', 1);
                 } else {
-                    $query->where('roles_bidang_id', $user->rolesBidang->id);
+                    $query->where('roles_bidang_id', $user->rolesBidang->id)->where('is_recycle', 1);
                 }
             }
         })->get();

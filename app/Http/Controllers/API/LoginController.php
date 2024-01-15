@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\RolesSeksi;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,11 +30,26 @@ class LoginController extends Controller
             $success['id'] =  $user->id;
             $success['roles'] =  $user->roles;
             $success['name'] =  $user->name;
+            $success['roles_bidang_id'] =  $user->roles_bidang_id;
+            $success['roles_seksi_id'] =  $user->roles_seksi_id;
             $success['permission_edit'] =  $user->permission_edit;
             $success['permission_upload'] =  $user->permission_upload;
             $success['permission_edit'] =  $user->permission_edit;
             $success['permission_create'] =  $user->permission_create;
             $success['permission_download'] =  $user->permission_download;
+
+            if ($user->roles_bidang_id == 1) {
+                $rolesBidang = $user->rolesBidang;
+                $rolesSeksi = $rolesBidang::all();
+
+                $success['rolesBidang'] = $rolesBidang;
+
+                $success['rolesSeksi'] = $rolesSeksi->toArray();
+            } else {
+                $rolesSeksi = RolesSeksi::where('roles_bidang_id', $user->roles_bidang_id)->get()->toArray();
+                $success['rolesSeksi'] = $rolesSeksi;
+            }
+
 
             return response()->json([
                 'message' => 'Login successful.',

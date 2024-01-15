@@ -40,7 +40,7 @@ class UploadFileController extends Controller
             ]);
 
             return response()->json([
-                'message' => 'Login successful.',
+                'message' => 'successful.',
                 'data' => $DataCenter
             ], 200);
         } else {
@@ -66,7 +66,7 @@ class UploadFileController extends Controller
 
         if ($DataCenter) {
             return response()->json([
-                'message' => 'Login successful.',
+                'message' => 'successful.',
                 'data' => $DataCenter
             ], 200);
         } else {
@@ -78,14 +78,27 @@ class UploadFileController extends Controller
     {
         $user = Auth::user();
 
-        if ($user->hasRole('super_admin')) {
-            $dataCenters = DataCenter::where('is_recycle', true)->get();
-        } else {
-            $userId = $user->id;
-            $dataCenters = DataCenter::where('users_id', $userId)
-                ->where('is_recycle', true)
-                ->get();
-        }
+        // if ($user->hasRole('super_admin')) {
+        //     $dataCenters = DataCenter::where('is_recycle', true)->get();
+        // } else {
+        //     $userId = $user->id;
+        //     $dataCenters = DataCenter::where('users_id', $userId)
+        //         ->where('is_recycle', true)
+        //         ->get();
+        // }
+        $rolesBidang = $user->rolesBidang;
+
+        $rolesSeksi = $user->rolesSeksi;
+
+        $dataCenters = DataCenter::where(function ($query) use ($user) {
+            if ($user->rolesBidang->id != 1) {
+                if ($user->rolesSeksi) {
+                    $query->where('roles_seksi_id', $user->rolesSeksi->id)->where('is_recycle', 1);
+                } else {
+                    $query->where('roles_bidang_id', $user->rolesBidang->id)->where('is_recycle', 1);
+                }
+            }
+        })->get();
 
         $responseData = [];
 
@@ -145,7 +158,7 @@ class UploadFileController extends Controller
         }
 
         return response()->json([
-            'message' => 'Login successful.',
+            'message' => 'successful.',
             'data' => $responseData
         ]);
     }
@@ -155,13 +168,19 @@ class UploadFileController extends Controller
         $user = Auth::user();
         $userId = $user->id;
 
-        if ($user->hasRole('super_admin')) {
-            $dataCenters = DataCenter::where('is_recycle', true)->get();
-        } else {
-            $dataCenters = DataCenter::where('users_id', $userId)
-                ->where('is_recycle', true)
-                ->get();
-        }
+        $rolesBidang = $user->rolesBidang;
+
+        $rolesSeksi = $user->rolesSeksi;
+
+        $dataCenters = DataCenter::where(function ($query) use ($user) {
+            if ($user->rolesBidang->id != 1) {
+                if ($user->rolesSeksi) {
+                    $query->where('roles_seksi_id', $user->rolesSeksi->id)->where('is_recycle', 1);
+                } else {
+                    $query->where('roles_bidang_id', $user->rolesBidang->id)->where('is_recycle', 1);
+                }
+            }
+        })->get();
 
         $responseData = [];
 
@@ -178,7 +197,7 @@ class UploadFileController extends Controller
         }
 
         return response()->json([
-            'message' => 'Login successful.',
+            'message' => 'successful.',
             'data' => $responseData,
         ]);
     }
@@ -188,13 +207,19 @@ class UploadFileController extends Controller
         $user = Auth::user();
         $userId = $user->id;
 
-        if ($user->hasRole('super_admin')) {
-            $dataCenters = DataCenter::where('is_recycle', true)->get();
-        } else {
-            $dataCenters = DataCenter::where('users_id', $userId)
-                ->where('is_recycle', true)
-                ->get();
-        }
+        $rolesBidang = $user->rolesBidang;
+
+        $rolesSeksi = $user->rolesSeksi;
+
+        $dataCenters = DataCenter::where(function ($query) use ($user) {
+            if ($user->rolesBidang->id != 1) {
+                if ($user->rolesSeksi) {
+                    $query->where('roles_seksi_id', $user->rolesSeksi->id)->where('is_recycle', 1);
+                } else {
+                    $query->where('roles_bidang_id', $user->rolesBidang->id)->where('is_recycle', 1);
+                }
+            }
+        })->get();
 
         $responseData = [];
 
@@ -211,7 +236,7 @@ class UploadFileController extends Controller
         }
 
         return response()->json([
-            'message' => 'Login successful.',
+            'message' => 'successful.',
             'data' => $responseData
         ]);
     }
