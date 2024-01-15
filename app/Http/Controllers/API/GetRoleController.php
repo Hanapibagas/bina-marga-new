@@ -21,15 +21,10 @@ class GetRoleController extends Controller
 
             $rolesBidang = RolesBidang::all();
             $rolesSeksi = RolesSeksi::all();
-            $response = [
-                "rolesBidang" => $rolesBidang,
-                "rolesSeksi" => $rolesSeksi
-            ];
+            $response = $rolesBidang;
         } else {
             $rolesSeksi = RolesSeksi::where('roles_bidang_id', $id)->get();
-            $response = [
-                "rolesSeksi" => $rolesSeksi
-            ];
+            $response = $rolesSeksi;
         }
 
         return response()->json([
