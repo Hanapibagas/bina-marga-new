@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\DetailsFolderController;
+use App\Http\Controllers\API\GetRoleController;
 use App\Http\Controllers\API\LoginController;
 use App\Http\Controllers\API\PengumumanController;
 use App\Http\Controllers\API\UploadFileController;
@@ -28,4 +29,6 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/v1/download-file/{id}', [UploadFileController::class, 'downloadFile']);
 
     Route::get('/v1/details/{id}', [DetailsFolderController::class, 'getDetails']);
+
+    Route::get('v1/role', [GetRoleController::class, 'getRole']);
 });
