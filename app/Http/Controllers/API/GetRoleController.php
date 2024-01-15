@@ -15,9 +15,11 @@ class GetRoleController extends Controller
         $user = Auth::user();
         $id = $user->roles_bidang_id;
 
-        $rolesBidang = RolesBidang::find($id);
+        // $rolesBidang = RolesBidang::find($id);
 
         if ($id == 1) {
+
+            $rolesBidang = RolesBidang::all();
             $rolesSeksi = RolesSeksi::all();
             $response = [
                 "rolesBidang" => $rolesBidang,
@@ -30,6 +32,9 @@ class GetRoleController extends Controller
             ];
         }
 
-        return response()->json($response);
+        return response()->json([
+            'message' => 'success',
+            'data' => $response
+        ]);
     }
 }
