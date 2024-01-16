@@ -26,7 +26,7 @@ class DumyDataSeeder extends Seeder
         ]);
         RolesSeksi::create([
             'roles_bidang_id' => 2,
-            'nama' => 'bidang bina teknik'
+            'name' => 'bidang bina teknik'
         ]);
 
         User::create([

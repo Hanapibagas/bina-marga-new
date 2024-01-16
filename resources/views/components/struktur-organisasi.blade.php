@@ -77,7 +77,7 @@
                                         @foreach ( $rolesS->RolesSeksi as $RolesSeksis )
                                         <ul>
                                             <li>
-                                                {{ $RolesSeksis->nama }}
+                                                {{ $RolesSeksis->name }}
                                             </li>
                                         </ul>
                                         @endforeach
@@ -132,7 +132,7 @@
         $("#addSubBagian").click(function () {
             var newFormGroup = '<div class="form-group">' +
                 '<label for="Pengguna">Nama SubBagian</label><br>' +
-                '<input type="text" name="nama[]" class="form-control" placeholder="Silahkan buat judul">' +
+                '<input type="text" name="name[]" class="form-control" placeholder="Silahkan buat judul">' +
                 '</div>';
 
             $(".modal-body").append(newFormGroup);

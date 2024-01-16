@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('roles_seksis', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
+            $table->string('name');
             $table->foreignId('roles_bidang_id')->constrained('roles_bidangs')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

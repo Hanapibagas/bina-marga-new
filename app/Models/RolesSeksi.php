@@ -10,7 +10,7 @@ class RolesSeksi extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama',
+        'name',
         'roles_bidang_id ',
     ];
 

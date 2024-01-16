@@ -28,20 +28,22 @@ class DaftarPenggunaController extends Controller
 
     public function postStrukturOrganisasi(Request $request)
     {
-        $rolesBidang = RolesBidang::create([
-            'name' => $request->name,
-        ]);
+        if ($request->has('name')) {
+            $rolesBidang = RolesBidang::create([
+                'name' => $request->name[0],
+            ]);
 
-        if ($request->has('nama')) {
-            foreach ($request->nama as $namaSubBagian) {
+            foreach ($request->name as $namaSubBagian) {
                 $rolesSeksi = new RolesSeksi([
-                    'nama' => $namaSubBagian,
+                    'name' => $namaSubBagian,
                 ]);
 
                 $rolesBidang->rolesSeksi()->save($rolesSeksi);
             }
-        }
 
-        return redirect()->back()->with('status', 'Selamat data anda berhasil terinput');
+            return redirect()->back()->with('status', 'Selamat data anda berhasil terinput');
+        } else {
+            return redirect()->back()->with('status', 'Gagal input data. Nama tidak ditemukan.');
+        }
     }
 }
