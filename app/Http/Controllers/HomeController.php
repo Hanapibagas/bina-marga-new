@@ -187,4 +187,9 @@ class HomeController extends Controller
 
         return redirect()->back()->with('status', 'Selamat folder anda berhasil diperbarui');
     }
+
+    public function getPrivaci()
+    {
+        return view('components.provaci-police');
+    }
 }

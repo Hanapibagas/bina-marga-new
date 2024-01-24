@@ -15,6 +15,8 @@ Route::get('/', [HomeController::class, 'getLogin'])->name('get.LoginHome');
 Route::get('/auth/google', [GoogleController::class, 'getRedirectToGoogle'])->name('get.Auth.Google');
 Route::get('/auth/google/callback', [GoogleController::class, 'getHandleGoogleCallback'])->name('google');
 
+Route::get('/privacy-police', [HomeController::class, 'getPrivaci'])->name('privacy-police');
+
 Auth::routes(['register' => false]);
 Route::get('register', function () {
     return view('auth.404');
