@@ -98,6 +98,7 @@ class UploadFileController extends Controller
                     $query->where('roles_bidang_id', $user->rolesBidang->id)->where('is_recycle', 1);
                 }
             }
+            $query->where('is_recycle', 1);
         })->get();
 
         $responseData = [];
@@ -180,6 +181,7 @@ class UploadFileController extends Controller
                     $query->where('roles_bidang_id', $user->rolesBidang->id)->where('is_recycle', 1);
                 }
             }
+            $query->where('is_recycle', 1);
         })->get();
 
         $responseData = [];
@@ -219,6 +221,7 @@ class UploadFileController extends Controller
                     $query->where('roles_bidang_id', $user->rolesBidang->id)->where('is_recycle', 1);
                 }
             }
+            $query->where('is_recycle', 1);
         })->get();
 
         $responseData = [];
