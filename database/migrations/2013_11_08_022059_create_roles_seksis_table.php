@@ -15,9 +15,13 @@ return new class extends Migration
     {
         Schema::create('roles_seksis', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->foreignId('roles_bidang_id')->constrained('roles_bidangs')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('users_id')->nullable();
+            $table->string('roles_bidang_id')->nullable();
+            // $table->foreignId('users_id')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('cascade');
+            // $table->foreignId('roles_bidang_id')->constrained('roles_bidangs')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('name_seksi');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -34,7 +34,13 @@ Route::put('/setting/update-password', [SettingProfileController::class, 'postUp
 
 // list struktur
 Route::get('/daftar-struktur-organisasi', [DaftarPenggunaController::class, 'getStrukturOrganisasi'])->name('getStrukturOrganisasi');
+Route::get('/daftar-struktur-seksi', [DaftarPenggunaController::class, 'getSeksi'])->name('getSeksi');
+Route::put('/daftar-struktur-organisasi/update/{id}', [DaftarPenggunaController::class, 'updateNameBidang'])->name('putStrukturOrganisasi');
+Route::put('/daftar-struktur-organisasi-seksi/update/{id}', [DaftarPenggunaController::class, 'updateNameSeksi'])->name('updateNameSeksi');
+Route::post('/daftar-struktur-organisasi/delete/{name_bidang}', [DaftarPenggunaController::class, 'deleteNameBidang'])->name('deleteStrukturOrganisasi');
+Route::post('/daftar-struktur-organisasi-seksi/delete/{name_seksi}', [DaftarPenggunaController::class, 'deleteNameSeksi'])->name('deleteNameSeksi');
 Route::post('/daftar-struktur-organisasi/create', [DaftarPenggunaController::class, 'postStrukturOrganisasi'])->name('postStrukturOrganisasi');
+Route::post('/daftar-struktur-seksis/create', [DaftarPenggunaController::class, 'postSeksi'])->name('postSeksi');
 
 Route::get('/pengumuman', [PengumumanController::class, 'getIndex'])->name('get.Index.Pengumuman');
 Route::post('/pengumuman/create', [PengumumanController::class, 'storePengumuman'])->name('post.Pengumuman');

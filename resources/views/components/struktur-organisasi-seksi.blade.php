@@ -42,7 +42,7 @@
             <div class="iq-card">
                 <div class="iq-card-header d-flex justify-content-between">
                     <div class="iq-header-title">
-                        <h4 class="card-title">Daftar Nama Bidang</h4>
+                        <h4 class="card-title">Daftar Nama Seksi</h4>
                     </div>
                     <div class="iq-card-header-toolbar d-flex align-items-center">
                         <div class="dropdown">
@@ -53,7 +53,7 @@
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton5">
                                 <a style="margin-bottom: 10px; margin-top: 10px; cursor: pointer;" class="dropdown-item"
                                     data-toggle="modal" data-target="#exampleModalCenterUser"><i
-                                        style="font-size: 25px;" class="ri-user-fill"></i>Data Bidang +</a>
+                                        style="font-size: 25px;" class="ri-user-fill"></i>Data Seksi +</a>
                             </div>
                         </div>
                     </div>
@@ -66,15 +66,17 @@
                                     <th>No</th>
                                     <th>Nama User</th>
                                     <th>Nama Bidang</th>
+                                    <th>Nama Seksi</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ( $roles as $key => $rolesS )
+                                @foreach ( $rolesSeksi as $key => $rolesS )
                                 <tr>
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ $rolesS->email }}</td>
                                     <td>{{ $rolesS->name_bidang }}</td>
+                                    <td>{{ $rolesS->name_seksi }}</td>
                                     <td>
                                         <div class="iq-card-header-toolbar d-flex align-items-center">
                                             <div class="dropdown">
@@ -108,7 +110,7 @@
     </div>
 </div>
 
-@foreach ( $roles as $value )
+@foreach ( $rolesSeksi as $value )
 <div class="modal fade" id="exampleModalCenterUserDelete{{ $value->id }}" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -119,10 +121,10 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('deleteStrukturOrganisasi', $value->name_bidang) }}" method="POST"
+            <form action="{{ route('deleteNameSeksi', $value->name_seksi) }}" method="POST"
                 enctype="multipart/form-data">
                 @csrf
-                <input type="hidden" name="name_bidang" value="{{ $value->name_bidang }}">
+                <input type="hidden" name="id" value="{{ $value->id }}">
                 <div class="modal-body">
                     <p>Apakah anda ingin menngahapus data ini ?</p>
                 </div>
@@ -136,7 +138,7 @@
 </div>
 @endforeach
 
-@foreach ( $roles as $value )
+@foreach ( $rolesSeksi as $value )
 <div class="modal fade" id="exampleModalCenterUserUpdate{{ $value->id }}" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -147,7 +149,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('putStrukturOrganisasi', $value->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('updateNameSeksi', $value->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <input type="hidden" name="id" value="{{ $value->id }}">
@@ -161,9 +163,17 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="Pengguna">Nama Bagian</label><br>
-                        <input type="text" name="name_bidang" class="form-control" id="folder-name"
-                            placeholder="Silahkan buat judul" value="{{ $value->name_bidang }}">
+                        <label for="Pengguna">Nama User</label><br>
+                        <select name="roles_bidang_id" class="form-control" required>
+                            @foreach ( $user as $v )
+                            <option value="{{ $v->id }}">{{ $v->email }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Pengguna">Nama Seksi</label><br>
+                        <input type="text" name="name_seksi" class="form-control" id="folder-name"
+                            placeholder="Silahkan buat judul" value="{{ $value->name_seksi }}">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -186,7 +196,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('postStrukturOrganisasi') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('postSeksi') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
@@ -198,8 +208,16 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label for="Pengguna">Nama Bidang</label><br>
+                        <select name="roles_bidang_id" class="form-control">
+                            @foreach ( $roles as $v )
+                            <option value="{{ $v->id }}">{{ $v->name_bidang }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="Pengguna">Nama Bagian</label><br>
-                        <input type="text" name="name_bidang" class="form-control" id="folder-name"
+                        <input type="text" name="name_seksi" class="form-control" id="folder-name"
                             placeholder="Silahkan buat judul">
                     </div>
                 </div>

@@ -29,7 +29,7 @@
                     <a href="{{ route('dataset') }}" class="iq-waves-effect"><i
                             class="ri-database-2-fill"></i><span>DataSet</span></a>
                 </li>
-                @if (Auth::check() && Auth::user()->RolesBidang->name == 'super_admin')
+                @if (Auth::check() && Auth::user()->RolesBidang->name_bidang == 'super_admin')
                 <li class="{{ request()->is('daftar-pengguna') ? 'active' : '' }}">
                     <a href="{{ route('get.Index.Pengguna') }}" class="iq-waves-effect"><i
                             class="ri-user-2-fill"></i><span>Daftar
@@ -38,7 +38,12 @@
                 <li class="{{ request()->is('daftar-struktur-organisasi') ? 'active' : '' }}">
                     <a href="{{ route('getStrukturOrganisasi') }}" class="iq-waves-effect"><i
                             class="ri-file-edit-fill"></i><span>Daftar
-                            Struktur Organisasi</span></a>
+                            Nama bidang</span></a>
+                </li>
+                <li class="{{ request()->is('daftar-struktur-seksi') ? 'active' : '' }}">
+                    <a href="{{ route('getSeksi') }}" class="iq-waves-effect"><i
+                            class="ri-file-edit-fill"></i><span>Daftar
+                            Nama seksi</span></a>
                 </li>
                 @endif
                 <li class="{{ request()->is('pengumuman') ? 'active' : '' }}">

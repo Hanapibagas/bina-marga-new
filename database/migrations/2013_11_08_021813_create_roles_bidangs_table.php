@@ -15,8 +15,11 @@ return new class extends Migration
     {
         Schema::create('roles_bidangs', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            // $table->foreignId('users_id')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('users_id')->nullable();
+            $table->string('name_bidang');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
