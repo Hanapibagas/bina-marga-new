@@ -64,7 +64,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama User</th>
+                                    {{-- <th>Nama User</th> --}}
                                     <th>Nama Bidang</th>
                                     <th>Nama Seksi</th>
                                     <th>Aksi</th>
@@ -74,7 +74,7 @@
                                 @foreach ( $rolesSeksi as $key => $rolesS )
                                 <tr>
                                     <td>{{ $key+1 }}</td>
-                                    <td>{{ $rolesS->email }}</td>
+                                    {{-- <td>{{ $rolesS->email }}</td> --}}
                                     <td>{{ $rolesS->name_bidang }}</td>
                                     <td>{{ $rolesS->name_seksi }}</td>
                                     <td>
@@ -154,19 +154,19 @@
                 @method('PUT')
                 <input type="hidden" name="id" value="{{ $value->id }}">
                 <div class="modal-body">
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="Pengguna">Nama User</label><br>
                         <select name="users_id" class="form-control" required>
                             @foreach ( $user as $v )
                             <option value="{{ $v->id }}">{{ $v->email }}</option>
                             @endforeach
                         </select>
-                    </div>
+                    </div> --}}
                     <div class="form-group">
                         <label for="Pengguna">Nama User</label><br>
                         <select name="roles_bidang_id" class="form-control" required>
-                            @foreach ( $user as $v )
-                            <option value="{{ $v->id }}">{{ $v->email }}</option>
+                            @foreach ( $roles as $v )
+                            <option value="{{ $v->id }}">{{ $v->name_bidang }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -199,14 +199,14 @@
             <form action="{{ route('postSeksi') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="Pengguna">Nama User</label><br>
                         <select name="users_id" class="form-control">
                             @foreach ( $user as $v )
                             <option value="{{ $v->id }}">{{ $v->email }}</option>
                             @endforeach
                         </select>
-                    </div>
+                    </div> --}}
                     <div class="form-group">
                         <label for="Pengguna">Nama Bidang</label><br>
                         <select name="roles_bidang_id" class="form-control">

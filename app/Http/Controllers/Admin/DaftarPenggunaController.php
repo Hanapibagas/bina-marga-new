@@ -27,6 +27,7 @@ class DaftarPenggunaController extends Controller
             ->select('users.email', 'roles_bidangs.id', 'roles_bidangs.name_bidang')
             ->get();
 
+        return response()->json($roles);
         return view('components.struktur-organisasi', compact('roles', 'user'));
     }
 
@@ -34,9 +35,8 @@ class DaftarPenggunaController extends Controller
     {
         $user = User::where('id', '>', 1)->get();
         $roles = RolesBidang::where('id', '>', 1)->get();
-        $rolesSeksi = RolesSeksi::leftJoin('roles_bidangs', 'roles_bidangs.id', '=', 'roles_seksis.roles_bidang_id')
-            ->join('users', 'users.id', '=', 'roles_seksis.users_id')
-            ->select('users.email', 'roles_seksis.id', 'roles_seksis.name_seksi',  'roles_bidangs.name_bidang')
+        $rolesSeksi = RolesSeksi::join('roles_bidangs', 'roles_bidangs.id', '=', 'roles_seksis.roles_bidang_id')
+            ->select('roles_bidangs.name_bidang', 'roles_seksis.id', 'roles_seksis.name_seksi')
             ->get();
 
         // return response()->json($rolesSeksi);
@@ -47,16 +47,16 @@ class DaftarPenggunaController extends Controller
     {
         $role = RolesSeksi::create([
             'roles_bidang_id' => $request->roles_bidang_id,
-            'users_id' => $request->users_id,
+            // 'users_id' => $request->users_id,
             'name_seksi' => $request->name_seksi
         ]);
 
-        $user = User::find($request->users_id);
+        // $user = User::find($request->users_id);
 
-        if ($user) {
-            $user->roles_seksi_id = $role->id;
-            $user->save();
-        }
+        // if ($user) {
+        //     $user->roles_seksi_id = $role->id;
+        //     $user->save();
+        // }
 
         return redirect()->back()->with('status', 'Selamat data anda berhasil terinput');
     }
@@ -64,16 +64,16 @@ class DaftarPenggunaController extends Controller
     public function postStrukturOrganisasi(Request $request)
     {
         $role = RolesBidang::create([
-            'users_id' => $request->users_id,
+            // 'users_id' => $request->users_id,
             'name_bidang' => $request->name_bidang
         ]);
 
-        $user = User::find($request->users_id);
+        // $user = User::find($request->users_id);
 
-        if ($user) {
-            $user->roles_bidang_id = $role->id;
-            $user->save();
-        }
+        // if ($user) {
+        //     $user->roles_bidang_id = $role->id;
+        //     $user->save();
+        // }
 
         return redirect()->back()->with('status', 'Selamat data anda berhasil terinput');
     }
@@ -87,7 +87,7 @@ class DaftarPenggunaController extends Controller
         }
 
         $update->update([
-            'users_id' => $request->users_id,
+            // 'users_id' => $request->users_id,
             'name_bidang' => $request->name_bidang
         ]);
 
@@ -102,7 +102,7 @@ class DaftarPenggunaController extends Controller
         }
 
         $update->update([
-            'users_id' => $request->users_id,
+            // 'users_id' => $request->users_id,
             'roles_bidang_id' => $request->roles_bidang_id,
             'name_seksi' => $request->name_seksi
         ]);
